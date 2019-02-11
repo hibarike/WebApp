@@ -1,0 +1,31 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Список городов</title>
+</head>
+<body>
+    <div>
+        <h3>Список Городов</h3>
+        <table>
+            <tr>
+                <td><p>Название Города</p></td>
+
+            </tr>
+            @foreach (var b in ViewBag.Cities)
+            {
+                <tr>
+                    <td><p>@b.Name</p></td>
+                    <td><p><a href="/Home/Delete/@b.Id">Удалить</a></p></td>
+                </tr>
+            }
+
+            <tr><td><p><a href="/Home/Create/">Добавить</a></p></td></tr>
+        </table>
+    </div>
+</body>

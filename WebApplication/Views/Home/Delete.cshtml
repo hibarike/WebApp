@@ -1,0 +1,18 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model WebApp.Models.City
+<h2>Удаление города</h2>
+<dl>
+    
+    <dd>
+        @Html.DisplayFor(model => model.Name)
+    </dd>
+
+   
+</dl>
+
+@using (Html.BeginForm())
+{
+    <input type="submit" value="Удалить" />
+}
