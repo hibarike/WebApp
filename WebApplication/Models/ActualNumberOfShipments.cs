@@ -16,13 +16,11 @@ namespace WebApp.Models
         //Город прибытия
         public int? ArrivalCityId { get; set; }
         public City ArrivalCity { get; set; }
-        //Фактическое количество перевозок по дням
-        public ICollection<ActualInDay> ActualNumberOfShipmentsByDay { get; set; }
+        //Фактическое за месяц
+        public int? ActualInMonthId { get; set; }
+        public ActualInMonth ActualInMonthForThisWay { get; set; }
 
-        ActualNumberOfShipments()
-        {
-            ActualNumberOfShipmentsByDay = new List<ActualInDay>();
-        }
+        
 
     }
 }

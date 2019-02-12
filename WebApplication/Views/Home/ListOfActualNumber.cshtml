@@ -14,18 +14,37 @@
         <h3>Список Городов</h3>
         <table>
             <tr>
-                <td><p>Название Города</p></td>
-
+                <td><p>Город отправки</p></td>
+                <td><p>Город прибытия</p></td>
             </tr>
-            @foreach (var b in ViewBag.Cities)
+            @foreach (var actual in ViewBag.Actuals)
             {
-                <tr>
-                    <td><p>@b.Name</p></td>
-                    <td><p><a href="/Home/Delete/@b.Id">Удалить</a></p></td>
-                </tr>
+                foreach (var cities in ViewBag.Cities)
+                {
+                    if (actual.DepartureCityId == cities.Id)
+                    {
+                        <td><p>@cities.Name</p></td>
+                    }
+                    if (actual.ArrivalCityId == cities.Id)
+                    {
+                        <td><p>@cities.Name</p></td>
+                    }
+                }
             }
 
-            <tr><td><p><a href="/Home/Create/">Добавить</a></p></td></tr>
+
+            @*@foreach (var b in ViewBag.ActualInDay)
+        {
+        <tr>
+            <td><p>@b.Id</p></td>
+
+                <td><input type="text" value="@b.NumberOfShipments"></td>
+
+        </tr>
+        }*@
+
+
         </table>
     </div>
 </body>
+</html>

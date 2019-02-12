@@ -11,5 +11,8 @@ namespace WebApp.Models
         public int Id { get; set; }
         //фактическое количество перевозок
         public int NumberOfShipments { get; set; }
+        //Связь с классом ActualNumberOfShipments
+        public int? ActualInMonthId { get; set; }
+        public ActualInMonth ActualInMonthD { get; set; }
     }
 }
