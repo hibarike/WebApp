@@ -153,16 +153,16 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\ActualInDaysController.cs" />
+    <Compile Include="Controllers\ActualInMonthsController.cs" />
+    <Compile Include="Controllers\ActualNumberOfShipmentsController.cs" />
+    <Compile Include="Controllers\CitiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ActualInDay.cs" />
     <Compile Include="Models\ActualInMonth.cs" />
     <Compile Include="Models\ActualNumberOfShipments.cs" />
     <Compile Include="Models\City.cs" />
-    <Compile Include="Models\Plan-Fact.cs" />
     <Compile Include="Models\PlanFactContext.cs" />
     <Compile Include="Models\PlanFactInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -206,11 +206,21 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\ActualInDays\Create.cshtml" />
-    <Content Include="Views\ActualInDays\Delete.cshtml" />
-    <Content Include="Views\ActualInDays\Details.cshtml" />
-    <Content Include="Views\ActualInDays\Edit.cshtml" />
-    <Content Include="Views\ActualInDays\Index.cshtml" />
+    <Content Include="Views\ActualInMonths\Create.cshtml" />
+    <Content Include="Views\ActualInMonths\Delete.cshtml" />
+    <Content Include="Views\ActualInMonths\Details.cshtml" />
+    <Content Include="Views\ActualInMonths\Edit.cshtml" />
+    <Content Include="Views\ActualInMonths\Index.cshtml" />
+    <Content Include="Views\ActualNumberOfShipments\Create.cshtml" />
+    <Content Include="Views\ActualNumberOfShipments\Delete.cshtml" />
+    <Content Include="Views\ActualNumberOfShipments\Details.cshtml" />
+    <Content Include="Views\ActualNumberOfShipments\Edit.cshtml" />
+    <Content Include="Views\ActualNumberOfShipments\Index.cshtml" />
+    <Content Include="Views\Cities\Create.cshtml" />
+    <Content Include="Views\Cities\Delete.cshtml" />
+    <Content Include="Views\Cities\Details.cshtml" />
+    <Content Include="Views\Cities\Edit.cshtml" />
+    <Content Include="Views\Cities\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

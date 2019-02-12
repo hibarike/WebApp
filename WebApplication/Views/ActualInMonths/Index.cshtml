@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebApp.Models.ActualInDay>
+﻿@model IEnumerable<WebApp.Models.ActualInMonth>
 
 @{
     ViewBag.Title = "Index";
@@ -13,13 +13,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ActualInMonthD.Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DayInMonth)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NumberOfShipments)
+            @Html.DisplayNameFor(model => model.InternalDays)
         </th>
         <th></th>
     </tr>
@@ -27,13 +21,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ActualInMonthD.Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DayInMonth)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumberOfShipments)
+            @Html.DisplayFor(modelItem => item.InternalDays)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
