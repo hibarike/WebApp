@@ -9,6 +9,8 @@ namespace WebApp.Models
     {
         //Id дня
         public int Id { get; set; }
+        //Дни месяца
+        public int DayInMonth { get; set; }
         //фактическое количество перевозок
         public int NumberOfShipments { get; set; }
         //Связь с классом ActualNumberOfShipments

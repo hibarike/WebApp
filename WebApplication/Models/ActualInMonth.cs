@@ -11,6 +11,7 @@ namespace WebApp.Models
         public int Id { get; set; }
         //Фактическое количество перевозок по дням
         public ICollection<ActualInDay> ActualNumberOfShipmentsByDay { get; set; }
+        
 
         ActualInMonth()
         {
