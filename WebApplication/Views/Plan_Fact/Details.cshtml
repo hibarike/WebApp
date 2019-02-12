@@ -1,0 +1,43 @@
+﻿@model WebApp.Models.Plan_Fact
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Plan_Fact</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ActualNumberOfShipmentsByDay.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActualNumberOfShipmentsByDay.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlannedNumberOfShipments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlannedNumberOfShipments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActualNumberOfShipments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActualNumberOfShipments)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

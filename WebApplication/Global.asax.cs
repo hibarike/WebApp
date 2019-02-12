@@ -14,7 +14,7 @@ namespace WebApplication
     {
         protected void Application_Start()
         {
-           // Database.SetInitializer(new PlanFactInitializer());
+            Database.SetInitializer(new PlanFactInitializer());
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
