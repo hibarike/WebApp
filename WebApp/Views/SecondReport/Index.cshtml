@@ -1,0 +1,96 @@
+﻿
+@using WebApp.Models
+@model List<SecondReport>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .table dark {
+        cursor: pointer;
+    }
+
+    /*table tr, td, th {
+        border: 5px solid #7B68EE;
+        border-collapse: collapse;
+        background-color: #483D8B
+    }*/
+
+    .header:hover {
+        cursor: pointer
+    }
+
+    .header .sign:after {
+        content: '-'
+    }
+
+    .header.expand .sign:after {
+        content: '+'
+    }
+
+    /*table {
+        color: white;
+    }*/
+
+    table {
+        opacity: 00:0.1
+    }
+</style>
+
+<h2>Index</h2>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<table border='0' class="table table-hover">
+    <tr>
+        <th>Отправление (прибытие)</th>
+        <th>План</th>
+        <th>Факт</th>
+        
+        @foreach (var item in Model)
+        { 
+<tr class='header expand'>
+            <td colspan=3 data-toggle="collapse" data-target="#@item.DepartureCity.Id.ToString()" class="clickable">@item.DepartureCity.Name</td>
+        </tr>
+            foreach (var subItem in item.Actuals)
+            {
+        <tr id="@item.DepartureCity.Id.ToString()" class="collapse">
+            <td >
+                @subItem.ArrivalCity.Name
+
+            </td>
+            <td>
+                @subItem.PlanedNumberOfShipments
+            </td>
+            <td>
+               @subItem.ActualNumberOfShipment
+            </td>
+        </tr>
+            }
+        }
+
+
+
+
+    @*</table>
+<table class="table table-hover" >
+    <thead>
+    <th></th>
+    <th></th>
+    <th></th>
+    </thead>
+
+    <tbody>
+        <tr data-toggle="collapse" data-target="#accordion" class="clickable">
+            <td>Some Stuff</td>
+            <td>Some more stuff</td>
+            <td>And some more</td>
+        </tr>
+        <tr>
+            <td>
+                <div id="accordion" class="collapse">Hidden by default</div>
+            </td>
+        </tr>
+    </tbody>*@
+</table>
+

@@ -58,6 +58,6 @@ namespace WebApp.Controllers
                 }
             }
         };
-        IList<UserRole> userRoles;
+       
     }
 }

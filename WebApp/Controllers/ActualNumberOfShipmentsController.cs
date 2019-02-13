@@ -27,9 +27,15 @@ namespace WebApplication.Controllers
             {
                 actuals = actuals.Where(p => p.ArrivalCityId == arrival);
             }
-            ViewBag.ArrivalCityId = new SelectList(db.Cities, "Id", "Name");
-            ViewBag.DepartureCityId = new SelectList(db.Cities, "Id", "Name");
-            return View(await actuals.ToListAsync());
+            List<City> cities = db.Cities.ToList();
+            cities.Insert(0,new City { Id = 0, Name = "Все"});
+            DepartureArrivalFilter viewModel = new DepartureArrivalFilter
+            {
+                Actuals = actuals.ToList(),
+                Departure = new SelectList(cities, "Id", "Name"),
+                Arrival = new SelectList(cities, "Id", "Name"),
+            };
+            return View( viewModel);
         }
         //public ActionResult Index()
         //{

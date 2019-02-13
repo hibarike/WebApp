@@ -1,5 +1,4 @@
-﻿@model IEnumerable<WebApp.Models.ActualNumberOfShipments>
-
+﻿@model WebApp.Models.DepartureArrivalFilter
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,15 +7,17 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Добавить новый", "Create")
 </p>
 <form method="get">
     <div class="form-inline form-group">
         <label class="control-label">Отправление </label>
-        @Html.DropDownList("DepartureCityId", null, htmlAttributes: new { @class = "form-control" })
+        @Html.DropDownList("departure", Model.Departure as SelectList,
+                htmlAttributes: new { @class = "form-control" })
 
         <label class="control-label">Прибытие </label>
-        @Html.DropDownList("ArrivalCityId", null, htmlAttributes: new { @class = "form-control" })
+        @Html.DropDownList("arrival", Model.Arrival as SelectList,
+                htmlAttributes: new { @class = "form-control" })
 
         <input type="submit" value="Фильтр" class="btn btn-default" />
     </div>
@@ -24,28 +25,36 @@
 <table class="table">
     <tr>
 
-        <th>
-            @Html.DisplayNameFor(model => model.DepartureCity.Name)
+        <th rowspan="2">
+            Отправление
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ArrivalCity.Name)
-        </th>
-
-        <th>
-            @Html.DisplayNameFor(model => model.PlanedNumberOfShipments)
+        <th rowspan="2">
+            Прибытие
         </th>
 
+        <th rowspan="2">
+            Планируемое количество перемещений
+        </th>
+
+        <th colspan="31">
+           <p align="center"> Фактическое количество по дням </p>
+        </th>
+        
+        <th rowspan="2">Фактическое количество</th>
+        <th rowspan="2"></th>
+    </tr>
+    <tr>
+        
         @for (var i = 1; i <= 31; i++)
         {
             <th>
                 @i
             </th>
         }
-        <th>Фактическое количество</th>
-        <th></th>
+        
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.Actuals)
     {
         <tr>
 
@@ -69,9 +78,9 @@
                 @Html.DisplayFor(modelItem => item.ActualNumberOfShipment)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @Html.ActionLink("Изменить", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Детали", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
             </td>
         </tr>
     }
