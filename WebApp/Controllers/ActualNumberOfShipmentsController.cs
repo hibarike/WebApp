@@ -84,16 +84,27 @@ namespace WebApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,DepartureCityId,ArrivalCityId,PlanedNumberOfShipments,ActualInMonthId")] ActualNumberOfShipments actualNumberOfShipments)
+        public async Task<ActionResult> Create([Bind(Include = "Id,DepartureCityId,ArrivalCityId,PlanedNumberOfShipments,ActualInMonthId")] ActualNumberOfShipments actualNumberOfShipments,string[] data)
         {
             if (ModelState.IsValid)
             {
+                db.ActualInMonths.Add(new ActualInMonth { InternalDays = string.Join(",", data)});
+                await db.SaveChangesAsync();
+                
+            }
+
+            if (ModelState.IsValid)
+            {
+                ActualInMonth actual = db.ActualInMonths.OrderByDescending(p=>p.Id).First();
+
+
+                actualNumberOfShipments.ActualInMonthId = actual.Id;
                 db.Actuals.Add(actualNumberOfShipments);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ActualInMonthId = new SelectList(db.ActualInMonths, "Id", "InternalDays", actualNumberOfShipments.ActualInMonthId);
+           // ViewBag.ActualInMonthId = new SelectList(db.ActualInMonths, "Id", "InternalDays", actualNumberOfShipments.ActualInMonthId);
             ViewBag.ArrivalCityId = new SelectList(db.Cities, "Id", "Name", actualNumberOfShipments.ArrivalCityId);
             ViewBag.DepartureCityId = new SelectList(db.Cities, "Id", "Name", actualNumberOfShipments.DepartureCityId);
             return View(actualNumberOfShipments);
@@ -107,7 +118,9 @@ namespace WebApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            
             ActualNumberOfShipments actualNumberOfShipments = await db.Actuals.FindAsync(id);
+            ActualInMonth actualInMonth = await db.ActualInMonths.FindAsync(actualNumberOfShipments.ActualInMonthId);
             if (actualNumberOfShipments == null)
             {
                 return HttpNotFound();
@@ -123,8 +136,16 @@ namespace WebApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,DepartureCityId,ArrivalCityId,PlanedNumberOfShipments,ActualInMonthId")] ActualNumberOfShipments actualNumberOfShipments)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,DepartureCityId,ArrivalCityId,PlanedNumberOfShipments,ActualInMonthId")] ActualNumberOfShipments actualNumberOfShipments, string[] data)
         {
+            if (ModelState.IsValid)
+            {
+               ActualInMonth actualInMonth =  db.ActualInMonths.Find(actualNumberOfShipments.ActualInMonthId);
+                actualInMonth.InternalDays = string.Join(",", data);
+                db.Entry(actualInMonth).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+               
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(actualNumberOfShipments).State = EntityState.Modified;
@@ -158,7 +179,11 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
+           
             ActualNumberOfShipments actualNumberOfShipments = await db.Actuals.FindAsync(id);
+            ActualInMonth actualInMonth = await db.ActualInMonths.FindAsync(actualNumberOfShipments.ActualInMonthId);
+            db.ActualInMonths.Remove(actualInMonth);
+            await db.SaveChangesAsync();
             db.Actuals.Remove(actualNumberOfShipments);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");

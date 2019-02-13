@@ -43,8 +43,34 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ActualInMonthId, "ActualInMonthId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
+                <table width="2">
+                    <tr>
+                        @for (var i = 1; i <= 31; i++)
+                        {
+
+                            <th>@i</th>
+
+
+                        }
+                    </tr>
+                    <tr>
+                        
+                            @for (var i = 1; i <= 31; i++)
+                            {
+
+                                <td><input name="data" type="text" value="0" size="1" /></td>
+                                
+
+                            }
+                        
+
+                    </tr>
+                </table>
+                @if (false)
+                {
                 @Html.DropDownList("ActualInMonthId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ActualInMonthId, "", new { @class = "text-danger" })
+                }
             </div>
         </div>
 
