@@ -10,6 +10,17 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+<form method="get">
+    <div class="form-inline form-group">
+        <label class="control-label">Отправление </label>
+        @Html.DropDownList("DepartureCityId", null, htmlAttributes: new { @class = "form-control" })
+
+        <label class="control-label">Прибытие </label>
+        @Html.DropDownList("ArrivalCityId", null, htmlAttributes: new { @class = "form-control" })
+
+        <input type="submit" value="Фильтр" class="btn btn-default" />
+    </div>
+</form>
 <table class="table">
     <tr>
 
@@ -23,45 +34,46 @@
         <th>
             @Html.DisplayNameFor(model => model.PlanedNumberOfShipments)
         </th>
-        
-            @for(var i = 1; i<=31;i++)
-            {
-                <th>
-                    @i
-                 </th>
-            }
+
+        @for (var i = 1; i <= 31; i++)
+        {
+            <th>
+                @i
+            </th>
+        }
         <th>Фактическое количество</th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
+    @foreach (var item in Model)
+    {
+        <tr>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.DepartureCity.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ArrivalCity.Name)
-        </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartureCity.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArrivalCity.Name)
+            </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.PlanedNumberOfShipments)
-        </td>
-        
-            @foreach(var subItem in item.ActualInMonthForThisWay.ActualInDays)
+            <td>
+                @Html.DisplayFor(modelItem => item.PlanedNumberOfShipments)
+            </td>
+
+            @foreach (var subItem in item.ActualInMonthForThisWay.ActualInDays)
             {
                 <td>@subItem</td>
             }
-        
-                <td>
-                    @Html.DisplayFor(modelItem => item.ActualNumberOfShipment)
-                </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
-}
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ActualNumberOfShipment)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>

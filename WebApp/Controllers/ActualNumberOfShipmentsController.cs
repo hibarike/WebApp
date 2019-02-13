@@ -16,14 +16,40 @@ namespace WebApplication.Controllers
         private PlanFactContext db = new PlanFactContext();
 
         // GET: ActualNumberOfShipments
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? departure, int? arrival)
         {
-            var actuals = db.Actuals.Include(a => a.ActualInMonthForThisWay).Include(a => a.ArrivalCity).Include(a => a.DepartureCity);
+            IQueryable<ActualNumberOfShipments> actuals = db.Actuals.Include(a => a.ActualInMonthForThisWay).Include(a => a.ArrivalCity).Include(a => a.DepartureCity);
+            if (departure != null && departure != 0)
+            {
+                actuals = actuals.Where(p => p.DepartureCityId == departure);
+            }
+            if (arrival != null && arrival != 0)
+            {
+                actuals = actuals.Where(p => p.ArrivalCityId == arrival);
+            }
+            ViewBag.ArrivalCityId = new SelectList(db.Cities, "Id", "Name");
+            ViewBag.DepartureCityId = new SelectList(db.Cities, "Id", "Name");
             return View(await actuals.ToListAsync());
         }
+        //public ActionResult Index()
+        //{
+          
 
-        // GET: ActualNumberOfShipments/Details/5
-        public async Task<ActionResult> Details(int? id)
+        //    //List<Company> companies = db.Companies.ToList();
+        //    //// устанавливаем начальный элемент, который позволит выбрать всех
+        //    //companies.Insert(0, new Company { Name = "Все", Id = 0 });
+
+        //    //UsersListViewModel viewModel = new UsersListViewModel
+        //    //{
+        //    //    Users = users.ToList(),
+        //    //    Companies = new SelectList(companies, "Id", "Name"),
+        //    //    Name = name
+        //    //};
+        //    return View(await actuals.ToListAsync());
+        //}
+
+            // GET: ActualNumberOfShipments/Details/5
+            public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -38,6 +64,7 @@ namespace WebApplication.Controllers
         }
 
         // GET: ActualNumberOfShipments/Create
+        [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             ViewBag.ActualInMonthId = new SelectList(db.ActualInMonths, "Id", "InternalDays");
@@ -67,6 +94,7 @@ namespace WebApplication.Controllers
         }
 
         // GET: ActualNumberOfShipments/Edit/5
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -104,6 +132,7 @@ namespace WebApplication.Controllers
         }
 
         // GET: ActualNumberOfShipments/Delete/5
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)

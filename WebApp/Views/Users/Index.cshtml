@@ -1,0 +1,33 @@
+﻿@model IEnumerable<WebApp.Models.ApplicationUser>
+@{
+                /**/
+
+                ViewBag.Title = "Index";
+}
+@{
+    IList<string> roles = new List<string> { "Роль не определена" };
+
+}
+<h2>Index</h2>
+<table>
+    <tr>
+        <th>Пользователь</th>
+        <th>Роль</th>
+    </tr>
+    @foreach (var user in Model)
+    {
+        <tr>
+
+            <td>@user.Email</td>
+
+           
+                <td>
+                    @Roles.GetRolesForUser(user.Email)
+                </td>
+            
+
+
+
+        </tr>
+    }
+</table>
