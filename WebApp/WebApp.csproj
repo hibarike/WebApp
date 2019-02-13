@@ -216,6 +216,7 @@
     <Compile Include="Models\PlanFactContext.cs" />
     <Compile Include="Models\PlanFactInitializer.cs" />
     <Compile Include="Models\SecondReport.cs" />
+    <Compile Include="Models\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

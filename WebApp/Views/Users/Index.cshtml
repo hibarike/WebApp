@@ -1,30 +1,34 @@
-﻿@model IEnumerable<WebApp.Models.ApplicationUser>
-@{
-                /**/
+﻿@using WebApp.Models;
 
-                ViewBag.Title = "Index";
-}
+@model List<UserRole>
 @{
-    IList<string> roles = new List<string> { "Роль не определена" };
+    /**/
 
+    ViewBag.Title = "Index";
 }
+
 <h2>Index</h2>
 <table>
     <tr>
         <th>Пользователь</th>
         <th>Роль</th>
     </tr>
-    @foreach (var user in Model)
+    @foreach (var item in Model)
     {
         <tr>
 
-            <td>@user.Email</td>
+            <td>@item.user.Email</td>
 
-           
-                <td>
-                    @Roles.GetRolesForUser(user.Email)
-                </td>
-            
+
+            <td>
+                @foreach (var subItem in item.roles)
+                {
+                <div>
+                    @subItem.ToString()
+                    </div>
+               }
+</td>
+
 
 
 

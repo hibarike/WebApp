@@ -31,33 +31,25 @@ namespace WebApp.Controllers
             IList<string> roles = new List<string> { "Роль не определена" };
             ApplicationUserManager userManager = HttpContext.GetOwinContext()
                                                     .GetUserManager<ApplicationUserManager>();
-
-             ApplicationUser user = userManager.FindByEmail(User.Identity.Name);
-            if (user != null)
-                roles = userManager.GetRoles(user.Id);
+            List<UserRole> UserRoles = new List<UserRole>();
+            foreach (var item in allUsers)
+            {
+                var _user = userManager.FindByEmail(User.Identity.Name);
+                UserRoles.Add(new UserRole
+                {
+                    user = _user,
+                    roles = userManager.GetRoles(_user.Id)
+                });
+            }
+            
             
         
             
-            return View(allUsers);
+            return View(UserRoles);
             
         }
-        class UserRole
-        {
-            static ApplicationUserManager userManager { get; set; }
-            ApplicationUser user { get; set; }
-            IList<string> roles
-            {
-                get
-                {
-                    IList<string> roles = new List<string> { "Роль не определена" };
-                  
-                   
-                    if (user != null)
-                        roles = userManager.GetRoles(user.Id);
-                    return roles;
-                }
-            }
-        };
+        
+        
        
     }
 }
