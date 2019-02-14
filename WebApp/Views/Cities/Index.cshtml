@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<WebApp.Models.City>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Города";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Города</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Создать новый", "Create")
 </p>
 <table class="table">
     <tr>
@@ -25,7 +25,7 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+           
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>

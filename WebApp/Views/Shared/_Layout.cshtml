@@ -24,7 +24,11 @@
                     <li>@Html.ActionLink("Главная", "Index", "Home")</li>
                     <li>@Html.ActionLink("Отчет №1", "Index", "ActualNumberOfShipments")</li>
                     <li>@Html.ActionLink("Отчет №2", "Index", "SecondReport")</li>
-                </ul>
+                    @if (User.IsInRole("admin"))
+                    {
+                        <li>@Html.ActionLink("Пользователи", "Index", "Users")</li>
+                    }
+                    </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
